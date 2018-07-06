@@ -5,11 +5,13 @@ const session = require('express-session');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
-const inventory = require('./inventory');
+const users = require('./users');
+const login = require('./login');
+const products = require('./products');
 
-const configureEndpoints = app => {
+const configureRoutes = app => {
   configureMiddleware(app);
-  configureRoutes(app);
+  createRoutes(app);
 };
 
 const configureMiddleware = app => {
@@ -39,8 +41,10 @@ const configureMiddleware = app => {
   app.use(passport.session());
 };
 
-const configureRoutes = app => {
-  inventory.createEndpoints(app);
+const createRoutes = app => {
+  users.createRoutes(app);
+  login.createRoutes(app);
+  products.createRoutes(app);
 
   const authenticatedRouter = getAuthenticatedRouter();
   app.use(authenticatedRouter);
@@ -61,5 +65,5 @@ const getAuthenticatedRouter = () => {
 };
 
 module.exports = {
-  configureEndpoints,
+  configureRoutes,
 };

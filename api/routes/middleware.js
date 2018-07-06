@@ -1,4 +1,4 @@
-const requireAdminAuthentication = (res, req, next) => {
+const requireAdminAuthentication = (req, res, next) => {
   if (req.isUnauthenticated() || !req.user.isAdmin) {
     res.status(401).end();
   } else {
@@ -6,7 +6,7 @@ const requireAdminAuthentication = (res, req, next) => {
   }
 };
 
-const requireUserAuthentication = (res, req, next) => {
+const requireUserAuthentication = (req, res, next) => {
   if (req.isUnauthenticated()) {
     res.status(401).end();
   } else {
