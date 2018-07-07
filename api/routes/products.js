@@ -11,7 +11,12 @@ const createRoutes = router => {
     })
     .post(requireAdminAuthentication, (req, res) => {
       const product = new Product(req.body);
-      product.save().then(() => res.status(200).end());
+      product
+        .save()
+        .then(() => res.status(200).end())
+        .catch(err => {
+          res.status(400).json(err.message);
+        });
     });
 };
 

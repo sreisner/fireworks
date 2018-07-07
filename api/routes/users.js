@@ -1,9 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
 
-const emailContainsExactlyOneAtSign = email =>
-  email.split('').reduce((acc, curr) => (curr === '@' ? ++acc : acc), 0) === 1;
-
 const createRoutes = router => {
   router.route('/users').post((req, res) => {
     const { firstName, lastName, email, password } = req.body;
@@ -11,29 +8,21 @@ const createRoutes = router => {
     if (password.length < 8) {
       return res
         .status(400)
-        .send('Password must be at least 8 characters long');
-    }
-
-    if (!emailContainsExactlyOneAtSign(email)) {
-      return res.status(400).send('The email you entered is invalid');
+        .json('Password must be at least 8 characters long');
     }
 
     User.findOne({ email }, (err, user) => {
       if (err) {
-        return res
-          .status(500)
-          .send('An unknown error occurred.  Please try again later.');
+        return res.status(500).json(err.message);
       }
 
       if (user) {
-        return res.status(409).send(`User ${user.email} already exists`);
+        return res.status(409).json(`User ${user.email} already exists`);
       }
 
       bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
-          return res
-            .status(500)
-            .send('An unknown error occurred.  Please try again later.');
+          return res.status(500).json(err.message);
         }
         const newUser = new User({
           firstName,
@@ -44,9 +33,7 @@ const createRoutes = router => {
 
         newUser.save((err, newUser) => {
           if (err) {
-            return res
-              .status(500)
-              .send('An unknown error occurred.  Please try again later.');
+            return res.status(500).json(err.message);
           }
 
           res.json(newUser);
