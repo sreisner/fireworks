@@ -15,7 +15,7 @@ class ProductList extends Component {
           if (loading) {
             return <h1>Loading</h1>;
           } else if (error) {
-            return <h1>{error}</h1>;
+            return <h1>{error.message}</h1>;
           } else {
             return (
               <ul>
