@@ -37,8 +37,6 @@ class Login extends Component {
     login(email, password).then(successful => {
       if (!successful) {
         this.setState({ error: 'Login failed' });
-      } else {
-        this.setState({ error: '' });
       }
     });
   };
