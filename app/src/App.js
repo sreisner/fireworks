@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProductList from './views/ProductList/ProductList';
+import withRoot from './withRoot';
 
 class App extends Component {
   render() {
@@ -7,4 +8,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRoot(App);
