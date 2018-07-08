@@ -1,6 +1,7 @@
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { AuthConsumer, AuthProvider } from './core/AuthContext';
 import Login from './views/Login/Login';
 import withRoot from './withRoot';
 
@@ -16,7 +17,9 @@ class App extends Component {
 
     return (
       <div className={classes.loginContainer}>
-        <Login />
+        <AuthProvider>
+          <AuthConsumer>{({ login }) => <Login login={login} />}</AuthConsumer>
+        </AuthProvider>
       </div>
     );
   }

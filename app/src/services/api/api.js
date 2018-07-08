@@ -70,9 +70,11 @@ const patch = (path, data) =>
     )
   );
 
-export default {
+const ApiService = {
   get,
   post,
   put,
   patch,
 };
+
+export default ApiService;

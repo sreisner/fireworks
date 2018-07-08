@@ -1,9 +1,11 @@
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
   Grid,
   TextField,
+  Typography,
   withStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -21,11 +23,36 @@ const styles = theme => ({
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: '',
+      password: '',
+      error: '',
+    };
   }
+
+  onLoginFormSubmit = event => {
+    event.preventDefault();
+
+    this.props.login(this.state.email, this.state.password).then(successful => {
+      if (!successful) {
+        this.setState({ error: 'Login failed' });
+      } else {
+        this.setState({ error: '' });
+      }
+    });
+  };
+
+  onEmailChange = email => {
+    this.setState({ email });
+  };
+
+  onPasswordChange = password => {
+    this.setState({ password });
+  };
 
   render() {
     const { classes } = this.props;
+    const { email, password, error } = this.state;
 
     return (
       <Grid
@@ -37,35 +64,42 @@ class Login extends Component {
         className={classes.loginContainer}
       >
         <Card>
-          <CardContent>
-            <form noValidate>
+          <form noValidate onSubmit={this.onLoginFormSubmit}>
+            <CardContent>
               <Grid container direction="column" spacing={40}>
                 <Grid item>
                   <TextField
                     label="Email"
                     name="email"
                     type="email"
+                    value={email}
                     fullWidth
-                    onChange={this.handleChange}
+                    onChange={e => this.onEmailChange(e.target.value)}
                   />
                 </Grid>
                 <Grid item>
                   <PasswordInput
                     label="Password"
                     name="password"
-                    onChange={this.handleChange}
+                    value={password}
+                    onChange={e => this.onPasswordChange(e.target.value)}
                   />
                 </Grid>
-                <Grid item alignItems="center">
-                  <Grid container justify="center">
-                    <Grid item>
-                      <Button type="submit">Log In</Button>
-                    </Grid>
-                  </Grid>
+                <Grid item>
+                  <Typography variant="caption">{error}</Typography>
                 </Grid>
               </Grid>
-            </form>
-          </CardContent>
+            </CardContent>
+            <CardActions>
+              <Grid container justify="center">
+                <Grid item>
+                  <Button type="submit" variant="outlined">
+                    Log In
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </form>
         </Card>
       </Grid>
     );
@@ -74,6 +108,7 @@ class Login extends Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default (Login = withStyles(styles)(Login));
