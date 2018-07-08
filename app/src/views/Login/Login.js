@@ -4,13 +4,12 @@ import {
   CardActions,
   CardContent,
   Grid,
-  TextField,
-  Typography,
   withStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { PasswordInput } from './PasswordInput';
+import { AuthConsumer } from '../../core/AuthContext';
+import LoginForm from './LoginForm';
 
 const styles = theme => ({
   loginContainer: {
@@ -30,10 +29,12 @@ class Login extends Component {
     };
   }
 
-  onLoginFormSubmit = event => {
+  onLoginFormSubmit = (event, login) => {
+    const { email, password } = this.state;
+
     event.preventDefault();
 
-    this.props.login(this.state.email, this.state.password).then(successful => {
+    login(email, password).then(successful => {
       if (!successful) {
         this.setState({ error: 'Login failed' });
       } else {
@@ -64,42 +65,30 @@ class Login extends Component {
         className={classes.loginContainer}
       >
         <Card>
-          <form noValidate onSubmit={this.onLoginFormSubmit}>
-            <CardContent>
-              <Grid container direction="column" spacing={40}>
-                <Grid item>
-                  <TextField
-                    label="Email"
-                    name="email"
-                    type="email"
-                    value={email}
-                    fullWidth
-                    onChange={e => this.onEmailChange(e.target.value)}
+          <AuthConsumer>
+            {({ login }) => (
+              <form noValidate onSubmit={e => this.onLoginFormSubmit(e, login)}>
+                <CardContent>
+                  <LoginForm
+                    email={email}
+                    password={password}
+                    error={error}
+                    onEmailChange={this.onEmailChange}
+                    onPasswordChange={this.onPasswordChange}
                   />
-                </Grid>
-                <Grid item>
-                  <PasswordInput
-                    label="Password"
-                    name="password"
-                    value={password}
-                    onChange={e => this.onPasswordChange(e.target.value)}
-                  />
-                </Grid>
-                <Grid item>
-                  <Typography variant="caption">{error}</Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions>
-              <Grid container justify="center">
-                <Grid item>
-                  <Button type="submit" variant="outlined">
-                    Log In
-                  </Button>
-                </Grid>
-              </Grid>
-            </CardActions>
-          </form>
+                </CardContent>
+                <CardActions>
+                  <Grid container justify="center">
+                    <Grid item>
+                      <Button type="submit" variant="outlined">
+                        Log In
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </CardActions>
+              </form>
+            )}
+          </AuthConsumer>
         </Card>
       </Grid>
     );
@@ -108,7 +97,6 @@ class Login extends Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired,
 };
 
 export default (Login = withStyles(styles)(Login));

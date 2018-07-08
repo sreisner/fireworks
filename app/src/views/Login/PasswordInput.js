@@ -55,5 +55,4 @@ PasswordInput.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-PasswordInput = withStyles(styles)(PasswordInput);
-export { PasswordInput };
+export default (PasswordInput = withStyles(styles)(PasswordInput));
