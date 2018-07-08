@@ -1,9 +1,14 @@
-import { withStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  withStyles,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { PasswordInput } from './PasswordInput';
 
 const styles = theme => ({
   loginContainer: {
@@ -31,19 +36,37 @@ class Login extends Component {
         justify="center"
         className={classes.loginContainer}
       >
-        <Grid item>
-          <Typography variant="display4">Welcome</Typography>
-        </Grid>
-        <Grid item>
-          <Grid container direction="row" spacing={40} justify="center">
-            <Grid item>
-              <Button variant="outlined">Sign Up</Button>
-            </Grid>
-            <Grid item>
-              <Button variant="outlined">Login</Button>
-            </Grid>
-          </Grid>
-        </Grid>
+        <Card>
+          <CardContent>
+            <form noValidate>
+              <Grid container direction="column" spacing={40}>
+                <Grid item>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    fullWidth
+                    onChange={this.handleChange}
+                  />
+                </Grid>
+                <Grid item>
+                  <PasswordInput
+                    label="Password"
+                    name="password"
+                    onChange={this.handleChange}
+                  />
+                </Grid>
+                <Grid item alignItems="center">
+                  <Grid container justify="center">
+                    <Grid item>
+                      <Button type="submit">Log In</Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
       </Grid>
     );
   }
