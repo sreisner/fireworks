@@ -5,7 +5,7 @@ import ProductList from './views/ProductList/ProductList';
 import withRoot from './withRoot';
 
 const styles = theme => ({
-  loginContainer: {
+  appContainer: {
     height: '100%',
   },
 });
@@ -15,7 +15,7 @@ class App extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.loginContainer}>
+      <div className={classes.appContainer}>
         <ProductList />
       </div>
     );
