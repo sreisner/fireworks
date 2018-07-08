@@ -1,10 +1,4 @@
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Typography,
-  withStyles,
-} from '@material-ui/core';
+import { IconButton, Toolbar, Typography, withStyles } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import React, { Component } from 'react';
 
@@ -14,7 +8,7 @@ const styles = theme => ({
   },
 });
 
-class FireworksAppBar extends Component {
+class FireworksToolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -24,18 +18,18 @@ class FireworksAppBar extends Component {
     const { classes } = this.props;
 
     return (
-      <AppBar>
+      <React.Fragment>
         <Toolbar>
-          <Typography variant="title" className={classes.flex}>
+          <Typography variant="display4" className={classes.flex}>
             Products
           </Typography>
           <IconButton>
             <ShoppingCart />
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </React.Fragment>
     );
   }
 }
 
-export default (FireworksAppBar = withStyles(styles)(FireworksAppBar));
+export default (FireworksToolbar = withStyles(styles)(FireworksToolbar));

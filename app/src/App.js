@@ -1,7 +1,7 @@
-import { Toolbar, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import FireworksAppBar from './core/FireworksAppBar';
+import FireworksToolbar from './core/FireworksToolbar';
 import ProductList from './views/ProductList/ProductList';
 import withRoot from './withRoot';
 
@@ -17,8 +17,7 @@ class App extends Component {
 
     return (
       <div className={classes.appContainer}>
-        <FireworksAppBar />
-        <Toolbar /> {/* Spacer for fixed app bar*/}
+        <FireworksToolbar />
         <ProductList />
       </div>
     );
