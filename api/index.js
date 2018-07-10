@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: './api/.env' });
+  require('dotenv').config({ path: './.env.development' });
 }
 
 const express = require('express');
