@@ -1,12 +1,14 @@
-import { IconButton, Toolbar, Typography, withStyles } from '@material-ui/core';
+import {
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import React, { Component } from 'react';
 
-const styles = theme => ({
-  flex: {
-    flex: 1,
-  },
-});
+const styles = theme => ({});
 
 class FireworksToolbar extends Component {
   constructor(props) {
@@ -20,12 +22,16 @@ class FireworksToolbar extends Component {
     return (
       <React.Fragment>
         <Toolbar>
-          <Typography variant="display4" className={classes.flex}>
-            Products
-          </Typography>
-          <IconButton>
-            <ShoppingCart />
-          </IconButton>
+          <Grid container alignItems="center" justify="space-between">
+            <Grid item>
+              <Typography variant="display4">Products</Typography>
+            </Grid>
+            <Grid item>
+              <IconButton>
+                <ShoppingCart />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Toolbar>
       </React.Fragment>
     );
