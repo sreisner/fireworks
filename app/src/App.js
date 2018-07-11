@@ -1,8 +1,8 @@
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import FireworksToolbar from './core/FireworksToolbar';
-import ProductList from './views/ProductList/ProductList';
+import FireworksToolbar from './components/FireworksToolbar';
+import ProductList from './components/ProductList';
 import withRoot from './withRoot';
 
 const styles = theme => ({

@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
-import Fetch from '../../core/Fetch';
+import Fetch from './Fetch';
 import Product from './Product';
 
 class ProductList extends Component {
