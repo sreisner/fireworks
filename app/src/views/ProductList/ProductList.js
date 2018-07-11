@@ -1,3 +1,4 @@
+import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import Fetch from '../../core/Fetch';
 import Product from './Product';
@@ -18,13 +19,20 @@ class ProductList extends Component {
             return <h1>{error.message}</h1>;
           } else {
             return (
-              <ul>
+              <Grid container spacing={16}>
                 {products.map(product => (
-                  <li key={product._id}>
+                  <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    sm={6}
+                    height="100%"
+                    key={product._id}
+                  >
                     <Product product={product} />
-                  </li>
+                  </Grid>
                 ))}
-              </ul>
+              </Grid>
             );
           }
         }}
