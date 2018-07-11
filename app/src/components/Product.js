@@ -4,18 +4,22 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
   card: {
-    maxWidth: 345,
+    width: 345,
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+  },
+  desc: {
+    height: '4rem',
+    overflow: 'hidden',
   },
 });
 
@@ -26,10 +30,10 @@ class Product extends Component {
   }
 
   render() {
-    const { classes, product } = this.props;
+    const { classes, product, addToCart } = this.props;
     return (
       <Grid container justify="center" alignItems="stretch">
-        <Grid item height="100%">
+        <Grid item>
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
@@ -38,17 +42,29 @@ class Product extends Component {
             />
             <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
-                {product.name} - ${product.price.dollars}.{product.price.cents}
+                {product.name}
               </Typography>
-              <Typography component="p">{product.shortDescription}</Typography>
+              <Typography component="p" className={classes.desc}>
+                {product.shortDescription}
+              </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" color="primary">
-                Add to Cart
-              </Button>
-              <Button size="small" color="primary">
-                Details
-              </Button>
+              <Grid container alignItems="center" justify="space-between">
+                <Grid item>
+                  <Typography variant="caption">
+                    ${product.price.dollars}.{product.price.cents}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => addToCart(product)}
+                    size="small"
+                    color="primary"
+                  >
+                    Add to Cart
+                  </Button>
+                </Grid>
+              </Grid>
             </CardActions>
           </Card>
         </Grid>

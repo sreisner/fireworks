@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": false
   },
   "git.ignoreLimitWarning": true,
   "editor.formatOnSave": true
