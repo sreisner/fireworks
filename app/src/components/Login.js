@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { AuthConsumer } from '../../core/AuthContext';
+import { AuthConsumer } from './AuthContext';
 import LoginForm from './LoginForm';
 
 const styles = theme => ({

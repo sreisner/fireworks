@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import FireworksToolbar from './components/FireworksToolbar';
 import ProductList from './components/ProductList';
 import withRoot from './withRoot';
+import { ShoppingCartProvider } from './components/ShoppingCartContext';
 
 const styles = theme => ({
   appContainer: {
@@ -17,8 +18,10 @@ class App extends Component {
 
     return (
       <div className={classes.appContainer}>
-        <FireworksToolbar />
-        <ProductList />
+        <ShoppingCartProvider>
+          <FireworksToolbar />
+          <ProductList />
+        </ShoppingCartProvider>
       </div>
     );
   }
