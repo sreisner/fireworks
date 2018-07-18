@@ -19,16 +19,9 @@ class ProductList extends Component {
             return <h1>{error.message}</h1>;
           } else {
             return (
-              <Grid container spacing={16}>
+              <Grid container spacing={16} justify="center">
                 {products.map(product => (
-                  <Grid
-                    item
-                    xs={12}
-                    md={4}
-                    sm={6}
-                    height="100%"
-                    key={product._id}
-                  >
+                  <Grid item xs={12} md={4} sm={6} key={product._id}>
                     <Product product={product} />
                   </Grid>
                 ))}
