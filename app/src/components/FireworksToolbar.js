@@ -4,9 +4,11 @@ import {
   Toolbar,
   Typography,
   withStyles,
+  Badge,
 } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import React, { Component } from 'react';
+import { ShoppingCartConsumer } from './ShoppingCartContext';
 
 const styles = theme => ({});
 
@@ -22,29 +24,28 @@ class FireworksToolbar extends Component {
         <Toolbar>
           <Grid container alignItems="center" justify="space-between">
             <Grid item>
-              <Typography variant="display4">Products</Typography>
+              <Typography variant="display3">Products</Typography>
             </Grid>
             <Grid item>
-              <Grid container spacing={40} align-items="flex-end">
-                <Grid item>
-                  <Grid container direction="column">
-                    <Grid item>
-                      <Typography variant="subheading" color="textSecondary">
-                        1 item
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="subheading" color="textSecondary">
-                        Subtotal: $99.99
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item>
-                  <IconButton>
-                    <ShoppingCart />
-                  </IconButton>
-                </Grid>
+              <Grid container spacing={40} alignItems="center">
+                <ShoppingCartConsumer>
+                  {({ subTotal, numItemsInCart }) => (
+                    <React.Fragment>
+                      <Grid item>
+                        <Typography variant="subheading" color="textSecondary">
+                          Subtotal: ${Number(+subTotal).toFixed(2)}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Badge badgeContent={numItemsInCart} color="primary">
+                          <IconButton>
+                            <ShoppingCart />
+                          </IconButton>
+                        </Badge>
+                      </Grid>
+                    </React.Fragment>
+                  )}
+                </ShoppingCartConsumer>
               </Grid>
             </Grid>
           </Grid>

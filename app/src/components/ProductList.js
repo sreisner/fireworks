@@ -21,7 +21,7 @@ class ProductList extends Component {
           } else {
             return (
               <ShoppingCartConsumer>
-                {({ updateCart }) => (
+                {({ addToCart }) => (
                   <Grid container spacing={16}>
                     {products.map(product => (
                       <Grid
@@ -32,7 +32,7 @@ class ProductList extends Component {
                         height="100%"
                         key={product._id}
                       >
-                        <Product product={product} addToCart={updateCart} />
+                        <Product product={product} addToCart={addToCart} />
                       </Grid>
                     ))}
                   </Grid>

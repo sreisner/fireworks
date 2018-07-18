@@ -31,6 +31,7 @@ class Product extends Component {
 
   render() {
     const { classes, product, addToCart } = this.props;
+
     return (
       <Grid container justify="center" alignItems="stretch">
         <Grid item>

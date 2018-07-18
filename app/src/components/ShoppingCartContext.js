@@ -8,16 +8,18 @@ export class ShoppingCartProvider extends React.Component {
 
     this.state = {
       cart: [],
+      subTotal: 0,
+      numItemsInCart: 0,
     };
   }
 
-  updateCart = (product, count = 1) => {
+  addToCart = (product, count = 1) => {
     if (count === 0) {
       this.removeProductFromCart(product);
     } else {
       this.setState(prevState => {
         let cart = [...prevState.cart];
-        const item = cart.find(item => item.product._id);
+        const item = cart.find(item => item.product._id === product._id);
 
         if (item) {
           item.count = count;
@@ -25,11 +27,31 @@ export class ShoppingCartProvider extends React.Component {
           cart = [...cart, { product, count }];
         }
 
-        return { cart };
+        return {
+          cart,
+          subTotal: this.getSubtotal(cart),
+          numItemsInCart: this.getNumItemsInCart(cart),
+        };
       });
     }
+  };
 
-    console.log(this.state.cart);
+  getNumItemsInCart = cart => {
+    return cart.reduce((acc, curr) => {
+      return acc + curr.count;
+    }, 0);
+  };
+
+  getSubtotal = cart => {
+    return cart.reduce(
+      (acc, curr) =>
+        +(
+          acc +
+          curr.product.price.dollars +
+          curr.product.price.cents / 100
+        ).toFixed(2),
+      0
+    );
   };
 
   removeProductFromCart = product => {
@@ -44,9 +66,11 @@ export class ShoppingCartProvider extends React.Component {
     return (
       <ShoppingCartContext.Provider
         value={{
-          updateCart: this.updateCart,
+          addToCart: this.addToCart,
           removeProductFromCart: this.removeProductFromCart,
           cart: this.state.cart,
+          subTotal: this.state.subTotal,
+          numItemsInCart: this.state.numItemsInCart,
         }}
       >
         {children}
