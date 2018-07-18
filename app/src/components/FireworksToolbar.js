@@ -25,9 +25,27 @@ class FireworksToolbar extends Component {
               <Typography variant="display4">Products</Typography>
             </Grid>
             <Grid item>
-              <IconButton>
-                <ShoppingCart />
-              </IconButton>
+              <Grid container spacing={40} align-items="flex-end">
+                <Grid item>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <Typography variant="subheading" color="textSecondary">
+                        1 item
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subheading" color="textSecondary">
+                        Subtotal: $99.99
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <IconButton>
+                    <ShoppingCart />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>
