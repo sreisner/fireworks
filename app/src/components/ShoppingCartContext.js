@@ -25,9 +25,11 @@ export class ShoppingCartProvider extends React.Component {
           cart = [...cart, { product, count }];
         }
 
-        return cart;
+        return { cart };
       });
     }
+
+    console.log(this.state.cart);
   };
 
   removeProductFromCart = product => {
