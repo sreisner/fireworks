@@ -58,7 +58,7 @@ class Product extends Component {
                 </Grid>
                 <Grid item>
                   <Button
-                    onClick={() => addToCart(product)}
+                    onClick={() => addToCart(product, 5)}
                     size="small"
                     color="primary"
                   >

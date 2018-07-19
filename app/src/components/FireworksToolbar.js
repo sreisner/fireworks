@@ -9,6 +9,7 @@ import {
 import { ShoppingCart } from '@material-ui/icons';
 import React, { Component } from 'react';
 import { ShoppingCartConsumer } from './ShoppingCartContext';
+import ShoppingCartMenu from './ShoppingCartMenu';
 
 const styles = theme => ({});
 
@@ -37,11 +38,7 @@ class FireworksToolbar extends Component {
                         </Typography>
                       </Grid>
                       <Grid item>
-                        <Badge badgeContent={numItemsInCart} color="primary">
-                          <IconButton>
-                            <ShoppingCart />
-                          </IconButton>
-                        </Badge>
+                        <ShoppingCartMenu />
                       </Grid>
                     </React.Fragment>
                   )}

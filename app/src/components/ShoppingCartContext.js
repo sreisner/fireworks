@@ -29,7 +29,7 @@ export class ShoppingCartProvider extends React.Component {
 
         return {
           cart,
-          subTotal: this.getSubtotal(cart),
+          subTotal: this.getCartSubTotal(cart),
           numItemsInCart: this.getNumItemsInCart(cart),
         };
       });
@@ -42,14 +42,16 @@ export class ShoppingCartProvider extends React.Component {
     }, 0);
   };
 
-  getSubtotal = cart => {
+  getProductSubTotal = cartItem => {
+    return (
+      (cartItem.product.price.dollars + cartItem.product.price.cents / 100) *
+      cartItem.count
+    );
+  };
+
+  getCartSubTotal = cart => {
     return cart.reduce(
-      (acc, curr) =>
-        +(
-          acc +
-          curr.product.price.dollars +
-          curr.product.price.cents / 100
-        ).toFixed(2),
+      (acc, curr) => +(acc + this.getProductSubTotal(curr)).toFixed(2),
       0
     );
   };
@@ -71,6 +73,7 @@ export class ShoppingCartProvider extends React.Component {
           cart: this.state.cart,
           subTotal: this.state.subTotal,
           numItemsInCart: this.state.numItemsInCart,
+          getProductSubTotal: this.getProductSubTotal,
         }}
       >
         {children}
