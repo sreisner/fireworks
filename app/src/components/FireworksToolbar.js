@@ -1,12 +1,4 @@
-import {
-  Grid,
-  IconButton,
-  Toolbar,
-  Typography,
-  withStyles,
-  Badge,
-} from '@material-ui/core';
-import { ShoppingCart } from '@material-ui/icons';
+import { Grid, Toolbar, Typography, withStyles } from '@material-ui/core';
 import React, { Component } from 'react';
 import { ShoppingCartConsumer } from './ShoppingCartContext';
 import ShoppingCartMenu from './ShoppingCartMenu';
@@ -30,7 +22,7 @@ class FireworksToolbar extends Component {
             <Grid item>
               <Grid container spacing={40} alignItems="center">
                 <ShoppingCartConsumer>
-                  {({ subTotal, numItemsInCart }) => (
+                  {({ subTotal }) => (
                     <React.Fragment>
                       <Grid item>
                         <Typography variant="subheading" color="textSecondary">

@@ -1,4 +1,4 @@
-import React, { component } from 'react';
+import React, { Component } from 'react';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import { ShoppingCart } from '@material-ui/icons';
@@ -32,7 +32,7 @@ const styles = theme => ({
     marginRight: '-16px',
   },
 });
-class ShoppingCartMenu extends React.Component {
+class ShoppingCartMenu extends Component {
   state = {
     anchorEl: null,
   };
