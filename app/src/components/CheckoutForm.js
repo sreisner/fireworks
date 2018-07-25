@@ -1,82 +1,32 @@
 import React, { Component } from 'react';
-import { TextField, Button } from '@material-ui/core';
 import CheckoutService from '../services/api/checkout/checkout';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import Elements from 'react-stripe-elements/lib/components/Elements';
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      cardNumber: '',
-      cvc: '',
-      mm: '',
-      yy: '',
-    };
+    this.state = {};
   }
 
   onSubmit = event => {
     event.preventDefault();
 
-    const { email, cardNumber, cvc, mm, yy } = this.state;
-
-    CheckoutService.makePayment(email, cardNumber, cvc, mm, yy);
-  };
-
-  onFormInputChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    this.props.stripe
+      .createToken({ name: 'Name' })
+      .then(response => response.token.id)
+      .then(token => CheckoutService.makePayment(token));
   };
 
   render() {
-    const { email, cardNumber, cvc, mm, yy } = this.state;
-
     return (
       <form onSubmit={this.onSubmit}>
-        <TextField
-          label="Email"
-          value={email}
-          name="email"
-          type="email"
-          onChange={this.onFormInputChange}
-        />
-
-        <TextField
-          label="Card Number"
-          value={cardNumber}
-          name="cardNumber"
-          type="number"
-          onChange={this.onFormInputChange}
-        />
-
-        <TextField
-          label="CVC"
-          value={cvc}
-          name="cvc"
-          type="number"
-          onChange={this.onFormInputChange}
-        />
-
-        <TextField
-          label="MM"
-          value={mm}
-          name="mm"
-          type="number"
-          onChange={this.onFormInputChange}
-        />
-
-        <TextField
-          label="YY"
-          value={yy}
-          name="yy"
-          type="number"
-          onChange={this.onFormInputChange}
-        />
-
-        <Button type="submit" />
+        <Elements>
+          <CardElement />
+        </Elements>
       </form>
     );
   }
 }
 
-export default CheckoutForm;
+export default (CheckoutForm = injectStripe(CheckoutForm));
