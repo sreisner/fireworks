@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const users = require('./users');
 const login = require('./login');
 const products = require('./products');
+const checkout = require('./checkout');
 
 const configureRoutes = app => {
   configureMiddleware(app);
@@ -45,6 +46,7 @@ const createRoutes = app => {
   users.createRoutes(app);
   login.createRoutes(app);
   products.createRoutes(app);
+  checkout.createRoutes(app);
 
   const authenticatedRouter = getAuthenticatedRouter();
   app.use(authenticatedRouter);
