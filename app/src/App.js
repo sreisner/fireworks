@@ -5,6 +5,7 @@ import FireworksToolbar from './components/FireworksToolbar';
 import ProductList from './components/ProductList';
 import withRoot from './withRoot';
 import { ShoppingCartProvider } from './components/ShoppingCartContext';
+import CheckoutForm from './components/CheckoutForm';
 
 const styles = theme => ({
   appContainer: {

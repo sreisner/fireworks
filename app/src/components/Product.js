@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Select, MenuItem } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
+import { ShoppingCartConsumer } from './ShoppingCartContext';
 
 const styles = theme => ({
   card: {
@@ -26,11 +27,19 @@ const styles = theme => ({
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      count: 0,
+    };
   }
 
+  onCountChange = event => {
+    this.setState({
+      count: event.target.value,
+    });
+  };
+
   render() {
-    const { classes, product, addToCart } = this.props;
+    const { classes, product } = this.props;
 
     return (
       <Grid container justify="center" alignItems="stretch">
@@ -57,13 +66,29 @@ class Product extends Component {
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Button
-                    onClick={() => addToCart(product, 5)}
-                    size="small"
-                    color="primary"
-                  >
-                    Add to Cart
-                  </Button>
+                  <Grid container>
+                    <Select
+                      value={this.state.count}
+                      onChange={this.onCountChange}
+                    >
+                      {[...Array(11)].map((_, count) => (
+                        <MenuItem key={count} value={count}>
+                          {`${count}`}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <ShoppingCartConsumer>
+                      {({ addToCart }) => (
+                        <Button
+                          onClick={() => addToCart(product, this.state.count)}
+                          size="small"
+                          color="primary"
+                        >
+                          Add to Cart
+                        </Button>
+                      )}
+                    </ShoppingCartConsumer>
+                  </Grid>
                 </Grid>
               </Grid>
             </CardActions>

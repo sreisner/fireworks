@@ -32,7 +32,7 @@ class ProductList extends Component {
                         height="100%"
                         key={product._id}
                       >
-                        <Product product={product} addToCart={addToCart} />
+                        <Product product={product} />
                       </Grid>
                     ))}
                   </Grid>
