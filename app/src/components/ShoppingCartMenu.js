@@ -12,13 +12,16 @@ import {
   Button,
 } from '../../node_modules/@material-ui/core';
 import { getFormattedProductPrice } from '../utils';
+import CheckoutDialog from './CheckoutDialog';
 
 const styles = theme => ({
   productImage: {
-    height: '100%',
+    maxHeight: '60px',
+    maxWidth: '60px',
   },
   productRow: {
     height: '50px',
+    alignItems: 'center',
   },
   menu: {
     width: '350px',
@@ -26,15 +29,31 @@ const styles = theme => ({
   },
   paddingsPub: {
     padding: '16px',
+    paddingTop: '8px',
+    paddingBottom: '8px',
   },
   divider: {
     marginLeft: '-16px',
     marginRight: '-16px',
   },
+  product: {
+    padding: '16px',
+  },
+  productInfo: {
+    paddingLeft: '12px',
+  },
+  itemCost: {
+    marginRight: '6px',
+  },
+  checkout: {
+    paddingLeft: 8,
+    paddingRight: 8,
+  },
 });
 class ShoppingCartMenu extends Component {
   state = {
     anchorEl: null,
+    open: false,
   };
 
   handleClick = event => {
@@ -43,6 +62,14 @@ class ShoppingCartMenu extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClickClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -71,10 +98,10 @@ class ShoppingCartMenu extends Component {
                   <Divider className={classes.divider} />
                 </Grid>
                 <Grid item>
-                  <Grid container spacing={16}>
+                  <Grid container>
                     {cart.map(item => (
                       <Grid item>
-                        <Grid container>
+                        <Grid container className={classes.product}>
                           <Grid item className={classes.productRow}>
                             <img
                               src={item.product.imageUrl}
@@ -83,13 +110,17 @@ class ShoppingCartMenu extends Component {
                             />
                           </Grid>
                           <Grid item>
-                            <Grid container direction="column">
+                            <Grid
+                              container
+                              className={classes.productInfo}
+                              direction="column"
+                            >
                               <Grid item>
                                 <Typography>{item.product.name} </Typography>
                               </Grid>
                               <Grid item>
                                 <Grid container>
-                                  <Grid item>
+                                  <Grid item className={classes.itemCost}>
                                     <Typography>
                                       ${getFormattedProductPrice(item.product)}
                                     </Typography>
@@ -108,17 +139,22 @@ class ShoppingCartMenu extends Component {
                     ))}
                   </Grid>
                 </Grid>
-                <Grid item>
+                <Grid item className={classes.checkout}>
                   <Button
                     variant="raised"
                     color="primary"
                     style={{ width: '100%' }}
+                    onClick={this.handleClickOpen}
                   >
                     Checkout
                   </Button>
                 </Grid>
               </Grid>
             </Menu>
+            <CheckoutDialog
+              open={this.state.open}
+              onClose={this.handleClickClose}
+            />
           </React.Fragment>
         )}
       </ShoppingCartConsumer>
