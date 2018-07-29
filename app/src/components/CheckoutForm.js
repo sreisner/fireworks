@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CheckoutService from '../services/api/checkout/checkout';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import Elements from 'react-stripe-elements/lib/components/Elements';
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -21,9 +20,7 @@ class CheckoutForm extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <Elements>
-          <CardElement />
-        </Elements>
+        <CardElement />
       </form>
     );
   }

@@ -13,6 +13,7 @@ import {
 } from '../../node_modules/@material-ui/core';
 import { getFormattedProductPrice } from '../utils';
 import CheckoutDialog from './CheckoutDialog';
+import { Elements } from 'react-stripe-elements';
 
 const styles = theme => ({
   productImage: {
@@ -151,10 +152,12 @@ class ShoppingCartMenu extends Component {
                 </Grid>
               </Grid>
             </Menu>
-            <CheckoutDialog
-              open={this.state.open}
-              onClose={this.handleClickClose}
-            />
+            <Elements>
+              <CheckoutDialog
+                open={this.state.open}
+                onClose={this.handleClickClose}
+              />
+            </Elements>
           </React.Fragment>
         )}
       </ShoppingCartConsumer>

@@ -14,26 +14,22 @@ export class ShoppingCartProvider extends React.Component {
   }
 
   addToCart = (product, count = 1) => {
-    if (count === 0) {
-      this.removeProductFromCart(product);
-    } else {
-      this.setState(prevState => {
-        let cart = [...prevState.cart];
-        const item = cart.find(item => item.product._id === product._id);
+    this.setState(prevState => {
+      let cart = [...prevState.cart];
+      const item = cart.find(item => item.product._id === product._id);
 
-        if (item) {
-          item.count = count;
-        } else {
-          cart = [...cart, { product, count }];
-        }
+      if (item) {
+        item.count += count;
+      } else {
+        cart = [...cart, { product, count }];
+      }
 
-        return {
-          cart,
-          subTotal: this.getCartSubTotal(cart),
-          numItemsInCart: this.getNumItemsInCart(cart),
-        };
-      });
-    }
+      return {
+        cart,
+        subTotal: this.getCartSubTotal(cart),
+        numItemsInCart: this.getNumItemsInCart(cart),
+      };
+    });
   };
 
   getNumItemsInCart = cart => {

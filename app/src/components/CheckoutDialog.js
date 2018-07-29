@@ -1,14 +1,25 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CheckoutForm from './CheckoutForm';
+import { injectStripe } from 'react-stripe-elements';
+import CheckoutService from '../services/api/checkout/checkout';
 
-export default class CheckoutDialog extends React.Component {
+class CheckoutDialog extends React.Component {
+  submitPayment = event => {
+    event.preventDefault();
+
+    this.props.stripe
+      .createToken({ name: 'Name' })
+      .then(response => response.token.id)
+      .then(token => CheckoutService.makePayment(token))
+      .then(this.props.onClose);
+  };
+
   render() {
     return (
       <div>
@@ -28,7 +39,7 @@ export default class CheckoutDialog extends React.Component {
             <Button onClick={this.props.onClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.props.onClose} color="primary">
+            <Button onClick={this.submitPayment} color="primary">
               Submit Payment
             </Button>
           </DialogActions>
@@ -37,3 +48,5 @@ export default class CheckoutDialog extends React.Component {
     );
   }
 }
+
+export default (CheckoutDialog = injectStripe(CheckoutDialog));
