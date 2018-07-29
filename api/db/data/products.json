@@ -1,0 +1,29 @@
+[
+  {
+    "_id": 1,
+    "title": "Atomic Shockwave 2/1",
+    "categoryId": 2,
+    "description":
+      "2\"- Brocade peony with purple stars and green glitter pistil; Silver crown with blue stars and green glittering pistil; Crackling willow with red and green glittering pistil. Three shot finale.",
+    "imageUrls": ["https://wfboom.com/images/products/12324.png"],
+    "duration": 34,
+    "retailPrice": 10000,
+    "casePrice": 5868,
+    "manufacturer": "AFW",
+    "colors": ["purple", "green", "silver", "blue", "gold", "red"],
+    "videoUrl": "http://wfboom.com/images/movies/AtomicShockwave17.mp4",
+    "type": "Straight Fire",
+    "numShots": 9,
+    "casePacking": 2,
+    "effects": [
+      "Brocades",
+      "Peonys",
+      "Stars",
+      "Glittering",
+      "Pistils",
+      "Crowns",
+      "Crackling",
+      "Willows"
+    ]
+  }
+]

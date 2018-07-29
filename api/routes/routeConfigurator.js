@@ -9,6 +9,8 @@ const users = require('./users');
 const login = require('./login');
 const products = require('./products');
 const checkout = require('./checkout');
+const bundles = require('./bundles');
+const categories = require('./categories');
 
 const configureRoutes = app => {
   configureMiddleware(app);
@@ -47,6 +49,8 @@ const createRoutes = app => {
   login.createRoutes(app);
   products.createRoutes(app);
   checkout.createRoutes(app);
+  bundles.createRoutes(app);
+  categories.createRoutes(app);
 
   const authenticatedRouter = getAuthenticatedRouter();
   app.use(authenticatedRouter);

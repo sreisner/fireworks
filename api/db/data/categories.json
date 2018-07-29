@@ -1,0 +1,27 @@
+[
+  {
+    "_id": 1,
+    "singularName": "cake",
+    "pluralName": "cakes"
+  },
+  {
+    "_id": 2,
+    "singularName": "500g repeater case",
+    "pluralName": "500g repeater cases"
+  },
+  {
+    "_id": 3,
+    "singularName": "200g repeater case",
+    "pluralName": "200g repeater cases"
+  },
+  {
+    "_id": 4,
+    "singularName": "artillery pack",
+    "pluralName": "artillery packs"
+  },
+  {
+    "_id": 5,
+    "singularName": "assorted small item",
+    "pluralName": "assorted small items"
+  }
+]
