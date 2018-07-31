@@ -27,6 +27,7 @@ const styles = theme => ({
   menu: {
     width: '350px',
     maxHeight: '300px',
+    outline: 'none',
   },
   paddingsPub: {
     padding: '16px',
@@ -39,9 +40,12 @@ const styles = theme => ({
   },
   product: {
     padding: '16px',
+    paddingTop: '0px',
+    alignItems: 'center',
   },
   productInfo: {
     paddingLeft: '12px',
+    alignItems: 'center',
   },
   itemCost: {
     marginRight: '6px',
