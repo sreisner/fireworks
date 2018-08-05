@@ -6,7 +6,22 @@ const createRoutes = router => {
     .route('/products')
     .get((req, res) => {
       Product.find()
-        .select('_id name price description shortDescription imageUrl')
+        .select([
+          '_id',
+          'title',
+          'categoryId',
+          'description',
+          'imageUrls',
+          'duration',
+          'retailPrice',
+          'manufacturer',
+          'colors',
+          'videoUrl',
+          'type',
+          'numShots',
+          'casePacking',
+          'effects',
+        ])
         .then(products => res.json(products));
     })
     .post(requireAdminAuthentication, (req, res) => {
