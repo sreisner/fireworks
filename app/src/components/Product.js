@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 import { ShoppingCartConsumer } from './ShoppingCartContext';
+import { getFormattedProductPrice } from '../utils';
 
 const styles = theme => ({
   card: {
@@ -62,7 +63,7 @@ class Product extends Component {
               <Grid container alignItems="center" justify="space-between">
                 <Grid item>
                   <Typography variant="caption">
-                    ${product.price.dollars}.{product.price.cents}
+                    {getFormattedProductPrice(product)}
                   </Typography>
                 </Grid>
                 <Grid item>

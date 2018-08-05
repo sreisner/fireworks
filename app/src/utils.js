@@ -1,5 +1,5 @@
 const getFormattedProductPrice = product => {
-  return `${product.price.dollars}.${product.price.cents}`;
+  return `$${(product.retailPrice / 100).toFixed(2)}`;
 };
 
 export { getFormattedProductPrice };
