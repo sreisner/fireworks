@@ -2,7 +2,6 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import Fetch from './Fetch';
 import Product from './Product';
-import { ShoppingCartConsumer } from './ShoppingCartContext';
 
 class ProductList extends Component {
   constructor(props) {
