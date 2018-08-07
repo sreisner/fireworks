@@ -1,4 +1,4 @@
-import { withStyles, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import FireworksToolbar from './components/FireworksToolbar';
