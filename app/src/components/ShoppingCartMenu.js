@@ -127,7 +127,7 @@ class ShoppingCartMenu extends Component {
                                 <Grid container>
                                   <Grid item className={classes.itemCost}>
                                     <Typography>
-                                      ${getFormattedProductPrice(item.product)}
+                                      {getFormattedProductPrice(item.product)}
                                     </Typography>
                                   </Grid>
                                   <Grid item>

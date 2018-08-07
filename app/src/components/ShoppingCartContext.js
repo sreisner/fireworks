@@ -39,17 +39,11 @@ export class ShoppingCartProvider extends React.Component {
   };
 
   getProductSubTotal = cartItem => {
-    return (
-      (cartItem.product.price.dollars + cartItem.product.price.cents / 100) *
-      cartItem.count
-    );
+    return +((cartItem.product.retailPrice / 100) * cartItem.count).toFixed(2);
   };
 
   getCartSubTotal = cart => {
-    return cart.reduce(
-      (acc, curr) => +(acc + this.getProductSubTotal(curr)).toFixed(2),
-      0
-    );
+    return cart.reduce((acc, curr) => acc + this.getProductSubTotal(curr), 0);
   };
 
   removeProductFromCart = product => {
