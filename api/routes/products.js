@@ -1,5 +1,4 @@
 const { Product } = require('../db/models');
-const { requireAdminAuthentication } = require('./middleware');
 
 const createRoutes = router => {
   router.route('/products').get((req, res) => {
