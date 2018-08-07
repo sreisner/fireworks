@@ -49,7 +49,7 @@ class Product extends Component {
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
-              image={product.imageUrl}
+              image={product.imageUrls[0]}
               title={product}
             />
             <CardContent>

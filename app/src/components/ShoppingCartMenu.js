@@ -106,7 +106,7 @@ class ShoppingCartMenu extends Component {
                 <Grid item>
                   <Grid container>
                     {cart.map(item => (
-                      <Grid item>
+                      <Grid item key={item.product._id}>
                         <Grid container className={classes.product}>
                           <Grid item className={classes.productRow}>
                             <img
