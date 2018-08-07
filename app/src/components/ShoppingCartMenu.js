@@ -14,6 +14,7 @@ import {
 import { getFormattedProductPrice } from '../utils';
 import CheckoutDialog from './CheckoutDialog';
 import { Elements } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   productImage: {
@@ -168,5 +169,9 @@ class ShoppingCartMenu extends Component {
     );
   }
 }
+
+ShoppingCartMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default (ShoppingCartMenu = withStyles(styles)(ShoppingCartMenu));

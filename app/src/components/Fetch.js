@@ -1,9 +1,11 @@
 import { Component } from 'react';
 import api from '../services/api/api';
+import PropTypes from 'prop-types';
 
 class Fetch extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       loading: true,
       error: '',
@@ -23,5 +25,10 @@ class Fetch extends Component {
     return this.props.children(loading, error, data);
   }
 }
+
+Fetch.propTypes = {
+  route: PropTypes.string.isRequired,
+  children: PropTypes.func.isRequired,
+};
 
 export default Fetch;

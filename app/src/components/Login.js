@@ -11,17 +11,12 @@ import React, { Component } from 'react';
 import { AuthConsumer } from './AuthContext';
 import LoginForm from './LoginForm';
 
-const styles = theme => ({
-  loginContainer: {
-    height: '100%',
-    width: '100%',
-    margin: 0,
-  },
-});
+const styles = theme => ({});
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: '',
       password: '',

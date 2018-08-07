@@ -28,6 +28,7 @@ const styles = theme => ({
 class Product extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       count: 0,
     };
@@ -101,6 +102,7 @@ class Product extends Component {
 }
 
 Product.propTypes = {
+  classes: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired,
 };
 

@@ -2,12 +2,14 @@ import { Grid, Toolbar, Typography, withStyles } from '@material-ui/core';
 import React, { Component } from 'react';
 import { ShoppingCartConsumer } from './ShoppingCartContext';
 import ShoppingCartMenu from './ShoppingCartMenu';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({});
 
 class FireworksToolbar extends Component {
   constructor(props) {
     super(props);
+
     this.state = {};
   }
 
@@ -43,5 +45,9 @@ class FireworksToolbar extends Component {
     );
   }
 }
+
+FireworksToolbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default (FireworksToolbar = withStyles(styles)(FireworksToolbar));

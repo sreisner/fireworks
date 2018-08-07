@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import CheckoutService from '../services/api/checkout/checkout';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {};
   }
 
@@ -25,5 +27,9 @@ class CheckoutForm extends Component {
     );
   }
 }
+
+CheckoutForm.propTypes = {
+  stripe: PropTypes.object.isRequired,
+};
 
 export default (CheckoutForm = injectStripe(CheckoutForm));

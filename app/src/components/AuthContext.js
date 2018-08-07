@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthService from '../services/api/auth/auth';
+import PropTypes from 'prop-types';
 
 const AuthContext = React.createContext({});
 
@@ -60,5 +61,9 @@ export class AuthProvider extends React.Component {
     );
   }
 }
+
+AuthContext.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
 export const AuthConsumer = AuthContext.Consumer;

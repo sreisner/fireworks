@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CheckoutForm from './CheckoutForm';
 import { injectStripe } from 'react-stripe-elements';
 import CheckoutService from '../services/api/checkout/checkout';
+import PropTypes from 'prop-types';
 
 class CheckoutDialog extends React.Component {
   submitPayment = event => {
@@ -48,5 +49,11 @@ class CheckoutDialog extends React.Component {
     );
   }
 }
+
+CheckoutDialog.propTypes = {
+  stripe: PropTypes.object.isRequired,
+  open: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default (CheckoutDialog = injectStripe(CheckoutDialog));
