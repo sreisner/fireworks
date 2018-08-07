@@ -50,14 +50,14 @@ class Product extends Component {
             <CardMedia
               className={classes.media}
               image={product.imageUrls[0]}
-              title={product}
+              title={product.title}
             />
             <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
-                {product.name}
+                {product.title}
               </Typography>
               <Typography component="p" className={classes.desc}>
-                {product.shortDescription}
+                {product.description}
               </Typography>
             </CardContent>
             <CardActions>
