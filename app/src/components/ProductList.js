@@ -20,24 +20,20 @@ class ProductList extends Component {
             return <h1>{error.message}</h1>;
           } else {
             return (
-              <ShoppingCartConsumer>
-                {({ addToCart }) => (
-                  <Grid container spacing={16}>
-                    {products.map(product => (
-                      <Grid
-                        item
-                        xs={12}
-                        md={4}
-                        sm={6}
-                        height="100%"
-                        key={product._id}
-                      >
-                        <Product product={product} />
-                      </Grid>
-                    ))}
+              <Grid container spacing={16}>
+                {products.map(product => (
+                  <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    sm={6}
+                    height="100%"
+                    key={product._id}
+                  >
+                    <Product product={product} />
                   </Grid>
-                )}
-              </ShoppingCartConsumer>
+                ))}
+              </Grid>
             );
           }
         }}
