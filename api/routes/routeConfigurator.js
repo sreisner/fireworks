@@ -9,7 +9,6 @@ const users = require('./users');
 const login = require('./login');
 const products = require('./products');
 const checkout = require('./checkout');
-const bundles = require('./bundles');
 const categories = require('./categories');
 
 const configureRoutes = app => {
@@ -49,25 +48,7 @@ const createRoutes = app => {
   login.createRoutes(app);
   products.createRoutes(app);
   checkout.createRoutes(app);
-  bundles.createRoutes(app);
   categories.createRoutes(app);
-
-  const authenticatedRouter = getAuthenticatedRouter();
-  app.use(authenticatedRouter);
-};
-
-const getAuthenticatedRouter = () => {
-  const router = express.Router();
-
-  router.use((req, res, next) => {
-    if (req.isUnauthenticated()) {
-      res.status(401).end();
-    } else {
-      next();
-    }
-  });
-
-  return router;
 };
 
 module.exports = {
