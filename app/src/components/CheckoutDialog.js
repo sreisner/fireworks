@@ -52,7 +52,7 @@ class CheckoutDialog extends React.Component {
 
 CheckoutDialog.propTypes = {
   stripe: PropTypes.object.isRequired,
-  open: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
