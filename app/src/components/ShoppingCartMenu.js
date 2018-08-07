@@ -110,7 +110,7 @@ class ShoppingCartMenu extends Component {
                         <Grid container className={classes.product}>
                           <Grid item className={classes.productRow}>
                             <img
-                              src={item.product.imageUrl}
+                              src={item.product.imageUrls[0]}
                               className={classes.productImage}
                               alt=""
                             />
@@ -122,7 +122,7 @@ class ShoppingCartMenu extends Component {
                               direction="column"
                             >
                               <Grid item>
-                                <Typography>{item.product.name} </Typography>
+                                <Typography>{item.product.title} </Typography>
                               </Grid>
                               <Grid item>
                                 <Grid container>
