@@ -23,5 +23,10 @@
     "_id": 5,
     "singularName": "assorted small item",
     "pluralName": "assorted small items"
+  },
+  {
+    "_id": 6,
+    "singularName": "reloadable shell kit",
+    "pluralName": "reloadable shell kits"
   }
 ]

@@ -1,29 +1,92 @@
 [
   {
     "_id": 1,
-    "title": "Atomic Shockwave 2/1",
+    "title": "High Stepper",
     "categoryId": 2,
     "description":
-      "2\"- Brocade peony with purple stars and green glitter pistil; Silver crown with blue stars and green glittering pistil; Crackling willow with red and green glittering pistil. Three shot finale.",
-    "imageUrls": ["https://wfboom.com/images/products/12324.png"],
-    "duration": 34,
-    "retailPrice": 10000,
-    "casePrice": 5868,
+      "Step cake with shots fanning left to right and back again. Red & green pearls and crackling effects with loud reports. 220 shots in about 25 seconds! (Rapid Fire)",
+    "imageUrls": ["https://wfboom.com/images/products/12033.png"],
+    "duration": 25,
+    "retailPrice": 23500,
+    "casePrice": 13999,
     "manufacturer": "AFW",
-    "colors": ["purple", "green", "silver", "blue", "gold", "red"],
-    "videoUrl": "http://wfboom.com/images/movies/AtomicShockwave17.mp4",
+    "colors": ["red", "green", "gold"],
+    "videoUrl": "http://wfboom.com/images/movies/HighStepper17.mp4",
+    "type": "Z-Cake",
+    "numShots": 220,
+    "casePacking": 2,
+    "effects": ["crackling", "stars"]
+  },
+  {
+    "_id": 2,
+    "title": "Fantastic",
+    "categoryId": 2,
+    "description":
+      "Fan shaped 500 gram repeater with; 1st Row: Aqua blue with lemon dahlia; 2nd Row: Brocade with red glitter; 3rd Row: Brocade with crackling flower; 4th Row: Aqua blue to red glitter; 5th Row: Aqua blue with lemon dahlia and red glitter; 6th Row: Red and green crackling willow.",
+    "imageUrls": ["https://wfboom.com/images/products/12189.png"],
+    "duration": 30,
+    "retailPrice": 11000,
+    "casePrice": 6669,
+    "manufacturer": "Firehawk",
+    "colors": ["aqua blue", "lemon", "gold", "red", "green"],
+    "videoUrl": "http://www.wfboom.com/images/movies/Fantasticlg.mp4",
+    "type": "Angled",
+    "numShots": 30,
+    "casePacking": 2,
+    "effects": ["dahlia", "glitter", "brocade", "crackling", "willow"]
+  },
+  {
+    "_id": 3,
+    "title": "Fireworks Factory",
+    "categoryId": 2,
+    "description":
+      "Starts with three 2\" shots of red, white and blue peonies; Then sixteen shots of brocade to red; Red to crackling palm; Brocade to green; Green to crackling palm; Quickened final three 2\" shots of brocade crowns.",
+    "imageUrls": ["https://wfboom.com/images/products/12186.png"],
+    "duration": 48,
+    "retailPrice": 12500,
+    "casePrice": 7999,
+    "manufacturer": "AFW",
+    "colors": ["red", "white", "blue", "green", "gold"],
+    "videoUrl": "http://wfboom.com/images/movies/FireworksFactory17.mp4",
+    "type": "Straight Fire",
+    "numShots": 22,
+    "casePacking": 2,
+    "effects": ["peonies", "brocade", "crackling", "palm", "brocade crown"]
+  },
+  {
+    "_id": 4,
+    "title": "Cascade",
+    "categoryId": 2,
+    "description":
+      "500 gram repeater with awesome waterfall effects ending with extra large golden stars. Shoots four shots at a time.",
+    "imageUrls": ["https://wfboom.com/images/products/12085.png"],
+    "duration": 21,
+    "retailPrice": 7500,
+    "casePrice": 9132,
+    "manufacturer": "AFW",
+    "colors": ["gold"],
+    "videoUrl": "http://wfboom.com/images/movies/Cascadelg.mp4",
+    "type": "Straight Fire",
+    "numShots": 20,
+    "casePacking": 4,
+    "effects": ["waterfall"]
+  },
+  {
+    "_id": 5,
+    "title": "Victory March",
+    "categoryId": 2,
+    "description":
+      "Red tail to blue peony with white glitter pistil; Silver tail to red peony with blue pistil; Blue tail to silver peony with red pistil; Red, white and blue peony with crackling pistil (Final three shots).",
+    "imageUrls": ["https://wfboom.com/images/products/12128.png"],
+    "duration": 37,
+    "retailPrice": 13000,
+    "casePrice": 7999,
+    "manufacturer": "AFW",
+    "colors": ["red", "white", "blue", "silver", "gold"],
+    "videoUrl": "http://wfboom.com/images/movies/VictoryMarch17.mp4",
     "type": "Straight Fire",
     "numShots": 9,
     "casePacking": 2,
-    "effects": [
-      "Brocades",
-      "Peonys",
-      "Stars",
-      "Glittering",
-      "Pistils",
-      "Crowns",
-      "Crackling",
-      "Willows"
-    ]
+    "effects": ["tails", "peonies", "glitter", "pistil", "crackling"]
   }
 ]
