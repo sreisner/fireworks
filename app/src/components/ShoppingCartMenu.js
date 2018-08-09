@@ -55,6 +55,11 @@ const styles = theme => ({
     paddingLeft: 8,
     paddingRight: 8,
   },
+  productScroll: {
+    position: 'relative',
+    maxHeight: 200,
+    overflow: 'auto',
+  },
 });
 class ShoppingCartMenu extends Component {
   state = {
@@ -104,7 +109,7 @@ class ShoppingCartMenu extends Component {
                   <Divider className={classes.divider} />
                 </Grid>
                 <Grid item>
-                  <Grid container>
+                  <Grid container className={classes.productScroll}>
                     {cart.map(item => (
                       <Grid item key={item.product._id}>
                         <Grid container className={classes.product}>
