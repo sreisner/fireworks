@@ -11,7 +11,7 @@ import {
   withStyles,
   Button,
 } from '../../node_modules/@material-ui/core';
-import { getFormattedProductPrice } from '../utils';
+import { getFormattedPrice } from '../utils';
 import CheckoutDialog from './CheckoutDialog';
 import { Elements } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
@@ -86,8 +86,8 @@ class ShoppingCartMenu extends Component {
       <ShoppingCartConsumer>
         {({ cart, numItemsInCart, subTotal }) => (
           <React.Fragment>
-            <Badge badgeContent={numItemsInCart} color="primary">
-              <IconButton onClick={this.handleClick}>
+            <Badge badgeContent={numItemsInCart} color="secondary">
+              <IconButton onClick={this.handleClick} color="inherit">
                 <ShoppingCart />
               </IconButton>
             </Badge>
@@ -99,7 +99,7 @@ class ShoppingCartMenu extends Component {
               <Grid container direction="column" className={classes.menu}>
                 <Grid item className={classes.paddingsPub}>
                   <Typography variant="subheading" color="textSecondary">
-                    Total: ${subTotal.toFixed(2)}
+                    Total: {getFormattedPrice(subTotal)}
                   </Typography>
                   <Divider className={classes.divider} />
                 </Grid>
@@ -128,7 +128,9 @@ class ShoppingCartMenu extends Component {
                                 <Grid container>
                                   <Grid item className={classes.itemCost}>
                                     <Typography>
-                                      {getFormattedProductPrice(item.product)}
+                                      {getFormattedPrice(
+                                        item.product.retailPrice
+                                      )}
                                     </Typography>
                                   </Grid>
                                   <Grid item>

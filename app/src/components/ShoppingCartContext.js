@@ -39,7 +39,7 @@ export class ShoppingCartProvider extends React.Component {
   };
 
   getProductSubTotal = cartItem => {
-    return +((cartItem.product.retailPrice / 100) * cartItem.count).toFixed(2);
+    return cartItem.product.retailPrice * cartItem.count;
   };
 
   getCartSubTotal = cart => {

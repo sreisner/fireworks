@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ShoppingCartConsumer } from './ShoppingCartContext';
 import ShoppingCartMenu from './ShoppingCartMenu';
 import PropTypes from 'prop-types';
+import { getFormattedPrice } from '../utils';
 
 const styles = theme => ({});
 
@@ -15,33 +16,31 @@ class FireworksToolbar extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Toolbar>
-          <Grid container alignItems="center" justify="space-between">
-            <Grid item>
-              <Typography variant="display3">Products</Typography>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={40} alignItems="center">
-                <ShoppingCartConsumer>
-                  {({ subTotal }) => (
-                    <React.Fragment>
-                      <Grid item>
-                        <Typography variant="subheading" color="textSecondary">
-                          Subtotal: ${Number(+subTotal).toFixed(2)}
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <ShoppingCartMenu />
-                      </Grid>
-                    </React.Fragment>
-                  )}
-                </ShoppingCartConsumer>
-              </Grid>
+      <Toolbar>
+        <Grid container alignItems="center" justify="space-between">
+          <Grid item>
+            <Typography variant="title">Products</Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={40} alignItems="center">
+              <ShoppingCartConsumer>
+                {({ subTotal }) => (
+                  <React.Fragment>
+                    <Grid item>
+                      <Typography variant="subheading">
+                        Subtotal: {getFormattedPrice(subTotal)}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <ShoppingCartMenu />
+                    </Grid>
+                  </React.Fragment>
+                )}
+              </ShoppingCartConsumer>
             </Grid>
           </Grid>
-        </Toolbar>
-      </React.Fragment>
+        </Grid>
+      </Toolbar>
     );
   }
 }
