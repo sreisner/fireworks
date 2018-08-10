@@ -16,7 +16,7 @@ const createRoutes = router => {
       })
       .then(charge => console.log(charge))
       .catch(err => console.log(err))
-      .finally(res.json({}));
+      .finally(() => res.json({}));
   });
 };
 
