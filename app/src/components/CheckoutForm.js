@@ -1,29 +1,64 @@
 import React, { Component } from 'react';
-import CheckoutService from '../services/api/checkout/checkout';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
+import { TextField } from '@material-ui/core';
 
 class CheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  onSubmit = event => {
-    event.preventDefault();
-
-    this.props.stripe
-      .createToken({ name: 'Name' })
-      .then(response => response.token.id)
-      .then(token => CheckoutService.makePayment(token));
-  };
-
   render() {
+    const {
+      firstName,
+      lastName,
+      email,
+      street,
+      city,
+      state,
+      zip,
+      onChange,
+    } = this.props;
+
     return (
-      <form onSubmit={this.onSubmit}>
+      <React.Fragment>
+        <TextField
+          name="firstName"
+          label="First Name"
+          value={firstName}
+          onChange={onChange}
+        />
+        <TextField
+          name="lastName"
+          label="Last Name"
+          value={lastName}
+          onChange={onChange}
+        />
+        <TextField
+          name="email"
+          label="Email"
+          value={email}
+          onChange={onChange}
+        />
+        <TextField
+          name="street"
+          label="Street"
+          value={street}
+          onChange={onChange}
+        />
+        <TextField name="city" label="City" value={city} onChange={onChange} />
+        <TextField
+          name="state"
+          label="State"
+          value={state}
+          onChange={onChange}
+        />
+        <TextField
+          type="number"
+          name="zip"
+          label="Zip"
+          value={zip}
+          onChange={onChange}
+        />
+
         <CardElement />
-      </form>
+      </React.Fragment>
     );
   }
 }

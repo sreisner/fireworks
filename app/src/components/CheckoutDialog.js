@@ -9,43 +9,108 @@ import CheckoutForm from './CheckoutForm';
 import { injectStripe } from 'react-stripe-elements';
 import CheckoutService from '../services/api/checkout/checkout';
 import PropTypes from 'prop-types';
+import { ShoppingCartConsumer } from './ShoppingCartContext';
 
 class CheckoutDialog extends React.Component {
-  submitPayment = event => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+    };
+  }
+
+  submitPayment = (event, userData, productData, amountToCharge) => {
     event.preventDefault();
 
     this.props.stripe
-      .createToken({ name: 'Name' })
+      .createToken({ name: this.state.email })
       .then(response => response.token.id)
-      .then(token => CheckoutService.makePayment(token))
-      .then(this.props.onClose);
+      .then(token =>
+        CheckoutService.makePayment(
+          token,
+          userData,
+          productData,
+          amountToCharge
+        )
+      );
+  };
+
+  onCheckoutFormChange = event => {
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: value,
+    });
   };
 
   render() {
+    const { firstName, lastName, email, street, city, state, zip } = this.state;
+
     return (
-      <div>
-        <Dialog
-          open={this.props.open}
-          onClose={this.props.onClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Checkout</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Enter your payment information:
-            </DialogContentText>
-            <CheckoutForm />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.props.onClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.submitPayment} color="primary">
-              Submit Payment
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      <ShoppingCartConsumer>
+        {({ cart, subTotal }) => {
+          const userData = this.state;
+
+          const productData = cart.map(item => ({
+            count: item.count,
+            productId: item.product._id,
+          }));
+
+          const amountToCharge = subTotal;
+
+          return (
+            <div>
+              <Dialog
+                open={this.props.open}
+                onClose={this.props.onClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Checkout</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Enter your payment information:
+                  </DialogContentText>
+                  <CheckoutForm
+                    firstName={firstName}
+                    lastName={lastName}
+                    email={email}
+                    street={street}
+                    city={city}
+                    state={state}
+                    zip={zip}
+                    onChange={this.onCheckoutFormChange}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.props.onClose} color="primary">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={event =>
+                      this.submitPayment(
+                        event,
+                        userData,
+                        productData,
+                        amountToCharge
+                      )
+                    }
+                    color="primary"
+                  >
+                    Submit Payment
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          );
+        }}
+      </ShoppingCartConsumer>
     );
   }
 }
