@@ -60,6 +60,12 @@ const styles = theme => ({
     maxHeight: 200,
     overflow: 'auto',
   },
+  emptyCart: {
+    fontSize: 20,
+    textAlign: 'center',
+    width: '100%',
+    height: 50,
+  },
 });
 class ShoppingCartMenu extends Component {
   state = {
@@ -109,48 +115,54 @@ class ShoppingCartMenu extends Component {
                   <Divider className={classes.divider} />
                 </Grid>
                 <Grid item>
-                  <Grid container className={classes.productScroll}>
-                    {cart.map(item => (
-                      <Grid item key={item.product._id}>
-                        <Grid container className={classes.product}>
-                          <Grid item className={classes.productRow}>
-                            <img
-                              src={item.product.imageUrls[0]}
-                              className={classes.productImage}
-                              alt=""
-                            />
-                          </Grid>
-                          <Grid item>
-                            <Grid
-                              container
-                              className={classes.productInfo}
-                              direction="column"
-                            >
-                              <Grid item>
-                                <Typography>{item.product.title} </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Grid container>
-                                  <Grid item className={classes.itemCost}>
-                                    <Typography>
-                                      {getFormattedPrice(
-                                        item.product.retailPrice
-                                      )}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <Typography>
-                                      Quantity: {item.count}
-                                    </Typography>
+                  {cart.length === 0 ? (
+                    <Typography className={classes.emptyCart}>
+                      Cart is Empty!
+                    </Typography>
+                  ) : (
+                    <Grid container className={classes.productScroll}>
+                      {cart.map(item => (
+                        <Grid item key={item.product._id}>
+                          <Grid container className={classes.product}>
+                            <Grid item className={classes.productRow}>
+                              <img
+                                src={item.product.imageUrls[0]}
+                                className={classes.productImage}
+                                alt=""
+                              />
+                            </Grid>
+                            <Grid item>
+                              <Grid
+                                container
+                                className={classes.productInfo}
+                                direction="column"
+                              >
+                                <Grid item>
+                                  <Typography>{item.product.title} </Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Grid container>
+                                    <Grid item className={classes.itemCost}>
+                                      <Typography>
+                                        {getFormattedPrice(
+                                          item.product.retailPrice
+                                        )}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                      <Typography>
+                                        Quantity: {item.count}
+                                      </Typography>
+                                    </Grid>
                                   </Grid>
                                 </Grid>
                               </Grid>
                             </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    ))}
-                  </Grid>
+                      ))}
+                    </Grid>
+                  )}
                 </Grid>
                 <Grid item className={classes.checkout}>
                   <Button

@@ -30,7 +30,7 @@ class Product extends Component {
     super(props);
 
     this.state = {
-      count: 0,
+      count: 1,
     };
   }
 
@@ -73,9 +73,9 @@ class Product extends Component {
                       value={this.state.count}
                       onChange={this.onCountChange}
                     >
-                      {[...Array(11)].map((_, count) => (
-                        <MenuItem key={count} value={count}>
-                          {`${count}`}
+                      {[...Array(10)].map((_, count) => (
+                        <MenuItem key={count} value={count + 1}>
+                          {`${count + 1}`}
                         </MenuItem>
                       ))}
                     </Select>
