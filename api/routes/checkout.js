@@ -1,4 +1,7 @@
 const Order = require('../db/models/order');
+
+const { canDeliverToZipCode } = require('./utils');
+
 const stripe =
   process.env.NODE_ENV === 'production'
     ? require('stripe')(process.env.STRIPE_PRODUCTION_KEY)
@@ -20,9 +23,12 @@ const validateEmailAddress = userData => {
   return userData.email && VALID_EMAIL_REGEX.test(userData.email);
 };
 
-// TODO:  Validate that we can deliver to the given address
 const validateDeliveryAddress = userData => {
   return userData.street && userData.city && userData.state && userData.zip;
+};
+
+const validateCanDeliverToZipCode = zip => {
+  return canDeliverToZipCode(zip);
 };
 
 const validateUserData = (req, res, next) => {
@@ -38,6 +44,11 @@ const validateUserData = (req, res, next) => {
     sendClientSideErrorResponse(
       res,
       'You must submit a valid street address for delivery.'
+    );
+  } else if (!validateCanDeliverToZipCode(userData.zip)) {
+    sendClientSideErrorResponse(
+      res,
+      `We do not currently deliver to given zip code: ${userData.zip}`
     );
   } else {
     next();

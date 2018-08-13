@@ -1,3 +1,4 @@
-(cd ./api; npm run db) &
-(cd ./api; npm run dev) &
-(cd ./app; npm start)
+#!/bin/bash
+(cd ./api; start npm run db) &
+(cd ./api; start npm run dev) &
+(cd ./app; start npm start)

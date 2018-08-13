@@ -10,6 +10,7 @@ const login = require('./login');
 const products = require('./products');
 const checkout = require('./checkout');
 const categories = require('./categories');
+const zipCodes = require('./zipCodes');
 
 const configureRoutes = app => {
   configureMiddleware(app);
@@ -49,6 +50,7 @@ const createRoutes = app => {
   products.createRoutes(app);
   checkout.createRoutes(app);
   categories.createRoutes(app);
+  zipCodes.createRoutes(app);
 };
 
 module.exports = {
