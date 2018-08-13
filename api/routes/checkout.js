@@ -69,7 +69,8 @@ validateProductData = (req, res, next) => {
   }
 };
 
-// TODO:  Validate that the given amountToCharge matches the calculated amount to charge
+// TODO:  Validate that the given amountToCharge matches the calculated amount
+// to charge
 validateAmountToCharge = (req, res, next) => {
   const { amountToCharge } = req.body;
 
