@@ -15,7 +15,8 @@
     "type": "Z-Cake",
     "numShots": 220,
     "casePacking": 2,
-    "effects": ["crackling", "stars"]
+    "effects": ["crackling", "stars"],
+    "count": 10
   },
   {
     "_id": 2,
@@ -33,7 +34,8 @@
     "type": "Angled",
     "numShots": 30,
     "casePacking": 2,
-    "effects": ["dahlia", "glitter", "brocade", "crackling", "willow"]
+    "effects": ["dahlia", "glitter", "brocade", "crackling", "willow"],
+    "count": 10
   },
   {
     "_id": 3,
@@ -51,7 +53,8 @@
     "type": "Straight Fire",
     "numShots": 22,
     "casePacking": 2,
-    "effects": ["peonies", "brocade", "crackling", "palm", "brocade crown"]
+    "effects": ["peonies", "brocade", "crackling", "palm", "brocade crown"],
+    "count": 10
   },
   {
     "_id": 4,
@@ -69,7 +72,8 @@
     "type": "Straight Fire",
     "numShots": 20,
     "casePacking": 4,
-    "effects": ["waterfall"]
+    "effects": ["waterfall"],
+    "count": 10
   },
   {
     "_id": 5,
@@ -87,6 +91,7 @@
     "type": "Straight Fire",
     "numShots": 9,
     "casePacking": 2,
-    "effects": ["tails", "peonies", "glitter", "pistil", "crackling"]
+    "effects": ["tails", "peonies", "glitter", "pistil", "crackling"],
+    "count": 10
   }
 ]

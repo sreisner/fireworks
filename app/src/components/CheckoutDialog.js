@@ -60,7 +60,7 @@ class CheckoutDialog extends React.Component {
 
           const productData = cart.map(item => ({
             count: item.count,
-            productId: item.product._id,
+            _id: item.product._id,
           }));
 
           const amountToCharge = subTotal;

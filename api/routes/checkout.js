@@ -1,4 +1,5 @@
 const Order = require('../db/models/order');
+const Product = require('../db/models/product');
 
 const { canDeliverToZipCode } = require('./utils');
 
@@ -35,7 +36,7 @@ const validateUserData = (req, res, next) => {
   const { userData } = req.body;
 
   if (!userData) {
-    sendClientSideErrorResponse(res, 'Missing user data in request');
+    sendClientSideErrorResponse(res, 'Missing user data in request.');
   } else if (!validateName(userData)) {
     sendClientSideErrorResponse(res, 'You must submit a first and last name.');
   } else if (!validateEmailAddress(userData)) {
@@ -55,15 +56,41 @@ const validateUserData = (req, res, next) => {
   }
 };
 
-// TODO:  Validate that all items in productData exist in our database
-// TODO:  Validate that all items in productData are in stock
-validateProductData = (req, res, next) => {
+const validateProductsInStock = async productData => {
+  return Product.find()
+    .then(inventory => {
+      for (const requestedProduct of productData) {
+        const inventoryProduct = inventory.find(
+          item => item._id === requestedProduct._id
+        );
+
+        if (
+          !inventoryProduct ||
+          inventoryProduct.count < requestedProduct.count
+        ) {
+          return false;
+        }
+      }
+
+      return true;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+const validateProductData = async (req, res, next) => {
   const { productData } = req.body;
 
   if (!productData) {
-    sendClientSideErrorResponse(res, 'Missing product data in request');
+    sendClientSideErrorResponse(res, 'Missing product data in request.');
   } else if (productData.length <= 0) {
     res.status(204).end();
+  } else if (!(await validateProductsInStock(productData))) {
+    sendClientSideErrorResponse(
+      res,
+      'The number of items in our inventory is less than the number of requested items for one or more products.'
+    );
   } else {
     next();
   }
@@ -71,10 +98,38 @@ validateProductData = (req, res, next) => {
 
 // TODO:  Validate that the given amountToCharge matches the calculated amount
 // to charge
-validateAmountToCharge = (req, res, next) => {
+const validateAmountToCharge = (req, res, next) => {
   const { amountToCharge } = req.body;
 
   next();
+};
+
+const chargeCard = async (token, amountToCharge, userData) => {
+  return await stripe.charges.create({
+    amount: amountToCharge,
+    currency: 'usd',
+    source: token,
+    description: `Charge for ${userData.firstName} ${userData.lastName}`,
+  });
+};
+
+const createNewOrderRecord = async (userData, productData, amountCharged) => {
+  const newOrder = new Order({
+    ...userData,
+    products: productData,
+    amountCharged: amountCharged,
+    status: 'Pending Delivery',
+  });
+
+  return await newOrder.save();
+};
+
+const updateProductCounts = async productData => {
+  for (const boughtProduct of productData) {
+    const inventoryProduct = await Product.findById(boughtProduct._id);
+    inventoryProduct.count -= boughtProduct.count;
+    await inventoryProduct.save();
+  }
 };
 
 const createRoutes = router => {
@@ -84,43 +139,29 @@ const createRoutes = router => {
       validateUserData,
       validateProductData,
       validateAmountToCharge,
-      (req, res) => {
+      async (req, res) => {
         const { token, userData, productData, amountToCharge } = req.body;
 
-        stripe.charges
-          .create({
-            amount: amountToCharge,
-            currency: 'usd',
-            source: token,
-            description: `Charge for ${userData.firstName} ${
-              userData.lastName
-            }`,
-            email: userData.email,
-          })
-          .then(charge => {
-            const newOrder = new Order({
-              ...userData,
-              products: productData,
-              amountCharged: charge.amount,
-              status: 'Pending Delivery',
-            });
+        let charge;
+        try {
+          charge = await chargeCard(token, amountToCharge, userData);
+        } catch (err) {
+          return res.status(500).send({
+            message: err.message,
+          });
+        }
 
-            newOrder.save((err, order) => {
-              if (err) {
-                // TODO:  Return successfully since their card was charged, but
-                // indicate in an email that the record was not saved to the
-                // database
-                return res.status(500).json(err.message);
-              }
+        try {
+          await createNewOrderRecord(userData, productData, charge.amount);
+          await updateProductCounts(productData);
+        } catch (err) {
+          // TODO:  Return successfully since their card was charged, but
+          // indicate in an email to the developers that something went
+          // wrong saving data to the database
+          console.error(err);
+        }
 
-              res.status(204).end();
-            });
-          })
-          .catch(err =>
-            res.status(500).send({
-              message: err.message,
-            })
-          );
+        res.status(204).end();
       }
     );
 };

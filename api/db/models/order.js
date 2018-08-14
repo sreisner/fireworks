@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderProduct = Schema({
-  count: {
+  _id: {
     type: Number,
     required: true,
   },
-  productId: {
+  count: {
     type: Number,
     required: true,
   },

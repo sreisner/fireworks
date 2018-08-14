@@ -63,6 +63,10 @@ const ProductSchema = Schema(
       type: [String],
       required: false,
     },
+    count: {
+      type: Number,
+      required: true,
+    },
   },
   { collection: 'products' }
 );
