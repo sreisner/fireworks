@@ -96,12 +96,27 @@ const validateProductData = async (req, res, next) => {
   }
 };
 
-// TODO:  Validate that the given amountToCharge matches the calculated amount
-// to charge
-const validateAmountToCharge = (req, res, next) => {
-  const { amountToCharge } = req.body;
+const validateAmountToCharge = async (req, res, next) => {
+  const { productData, amountToCharge } = req.body;
 
-  next();
+  const inventoryProducts = await Product.find();
+
+  const actualAmountToCharge = productData.reduce((sum, requestedProduct) => {
+    const inventoryProduct = inventoryProducts.find(
+      p => p._id === requestedProduct._id
+    );
+
+    return sum + inventoryProduct.retailPrice * requestedProduct.count;
+  }, 0);
+
+  if (actualAmountToCharge !== amountToCharge) {
+    sendClientSideErrorResponse(
+      res,
+      'The computed amount to charge and the amount to charge displayed to the user was different'
+    );
+  } else {
+    next();
+  }
 };
 
 const chargeCard = async (token, amountToCharge, userData) => {
@@ -153,7 +168,9 @@ const createRoutes = router => {
 
         try {
           await createNewOrderRecord(userData, productData, charge.amount);
-          await updateProductCounts(productData);
+          if (process.env.NODE_ENV === 'production') {
+            await updateProductCounts(productData);
+          }
         } catch (err) {
           // TODO:  Return successfully since their card was charged, but
           // indicate in an email to the developers that something went
